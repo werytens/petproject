@@ -46,7 +46,7 @@ const Form: React.FC<{ display?: boolean }> = ({ display = false }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isDirty },
     reset,
     watch,
     control,
@@ -63,6 +63,7 @@ const Form: React.FC<{ display?: boolean }> = ({ display = false }) => {
 
   return (
     <div style={{ textAlign: "center", display: display ? "block" : "none" }}>
+      {String(isValid)} {String(isDirty)}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-[100%]">
           <input
@@ -140,7 +141,7 @@ const Form: React.FC<{ display?: boolean }> = ({ display = false }) => {
           )}
         />
 
-        <button>Send</button>
+        <button disabled={!isValid}>Send</button>
       </form>
     </div>
   );
